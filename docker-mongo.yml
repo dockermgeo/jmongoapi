@@ -1,0 +1,21 @@
+mongodb:
+    image: dockermgeo/mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_PASSWORD=password123
+      - MONGO_INITDB_ROOT_USERNAME=root
+    volumes:
+      - "/docker/data/mongodb:/data/db"
+mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 27081:8081
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=192.168.1.28
+      - ME_CONFIG_BASICAUTH_USERNAME=root
+      - ME_CONFIG_BASICAUTH_PASSWORD=password123
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password123
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true

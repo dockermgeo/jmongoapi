@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        table {width:100%;}
+        tr:nth-child(even) {background: #FFF}
+        tr:nth-child(odd) {background: #CCC}
+    </style>
+    <title>API-Formular</title>
+</head>
+<body>
+<div class="container">
+    <h3>Add a Application</h3>
+    <table>
+        <form method="POST" action="/api/form/create">
+            <tr style="background-color: white;"><td>App-Name:</td><td><input type="text" name="product" style="width: 300px;"></td></tr>
+            <tr style="background-color: white;"><td>Project-Name:</td><td><input type="text" name="project" style="width: 300px;"></td></tr>
+            <tr style="background-color: white;"><td>Repository-Name:</td><td><input type="text" name="repo" style="width: 300px;"></td></tr>
+            <tr style="background-color: white;"><td colspan="2"><input type="submit" value="save" class="btn btn-primary"></td></tr>
+        </form>
+    </table>
+</div>
+
+    <script>
+        $.getJSON( "/api/get", function( data ) {
+          var items = [];
+          $.each( data, function( key, val ) {
+            items.push( "<tr><td width='250px'>"+val.name+"</td><td width='*'>"+val.repo+"</td></tr>");
+          });
+
+          $( "<table/>", {
+            html: items.join( "" )
+          }).appendTo( $( ".tablecontainer" ) );
+        });
+    </script>
+<div style="height: 20px;"></div>
+<div class="container tablecontainer">
+    <table><tr style="background-color: white;"><td width='250px'><b>Appname</b></td><td width='*'><b>Repository</b></td></tr></table>
+</div>
+</body>
+</html>
